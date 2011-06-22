@@ -14,7 +14,7 @@ class Kohana_Postmark_Adapter implements Mail_Postmark_Adapter_Interface {
 	
 	public static function log($logData)
 	{
-		Kohana::$log->add(Kohana::INFO, Arr::get($logData, 'return'));
+		Kohana::$log->add('info', Arr::get($logData, 'return'));
 	}
 }
 
