@@ -1,15 +1,17 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Kohana_Postmark_Adapter implements Mail_Postmark_Adapter_Interface {
+require_once Kohana::find_file('vendor', 'postmark/src/Postmark/MailAdapterInterface');
+
+class Kohana_Postmark_Adapter implements Postmark\MailAdapterInterface {
 	
 	public static function getApiKey()
 	{
-		return Kohana::$config->load('postmark.api_key');
+		return Kohana::$config->load('postmark')->get('api_key');
 	}
 	
-	public static function setupDefaults(Mail_Postmark &$mail)
+	public static function setupDefaults(Postmark\Mail &$mail)
 	{
-		$mail->from(Kohana::$config->load('postmark.from_address'), Kohana::$config->load('postmark.from_name'));
+		$mail->from(Kohana::$config->load('postmark')->get('from_address'), Kohana::$config->load('postmark')->get('from_name'));
 	}
 	
 	public static function log($logData)

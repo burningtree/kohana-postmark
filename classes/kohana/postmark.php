@@ -1,18 +1,18 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+require_once Kohana::find_file('vendor', 'postmark/src/Postmark/MailAdapterInterface');
+
 class Kohana_Postmark {
 	
 	public static function compose()
 	{
-		if ( ! class_exists('Mail_Postmark'))
+		if ( ! class_exists('Postmark\Mail'))
 		{
-			require Kohana::find_file('vendor', 'postmark/Postmark');
+			require_once Kohana::find_file('vendor', 'postmark/src/Postmark/Mail', 'php');
 		}
 		
-		return Mail_Postmark::compose();
+		return Postmark\Mail::compose();
 	}
 }
-
-require Kohana::find_file('vendor', 'postmark/Adapter_Interface');
 
 class Mail_Postmark_Adapter extends Postmark_Adapter { }
